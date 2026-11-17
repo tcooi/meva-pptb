@@ -1,7 +1,7 @@
 {
-    "name": "pptb-environment-variables",
+    "name": "meva-pptb",
     "version": "0.1.0",
-    "displayName": "Environment Variables Manager",
+    "displayName": "Meva – Manage Environment Variables",
     "description": "List, search, compare, create and edit Dataverse environment variables and their default and current values across environments.",
     "main": "index.html",
     "icon": "icons/tool.svg",
