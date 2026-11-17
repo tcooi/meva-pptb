@@ -1,4 +1,4 @@
-# Meva – Manage Environment Variables
+# meva – Manage Environment Variables
 
 A [Power Platform ToolBox](https://github.com/PowerPlatformToolBox) tool to list, search and compare Dataverse environment variables across environments.
 
