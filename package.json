@@ -1,0 +1,67 @@
+{
+    "name": "pptb-environment-variables",
+    "version": "0.1.0",
+    "displayName": "Environment Variables Manager",
+    "description": "List, search, compare, create and edit Dataverse environment variables and their default and current values across environments.",
+    "main": "index.html",
+    "icon": "icons/tool.svg",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "tcooi",
+            "url": "https://github.com/tcooi"
+        }
+    ],
+    "configurations": {
+        "repository": "https://github.com/tcooi/meva-pptb",
+        "readmeUrl": "https://raw.githubusercontent.com/tcooi/meva-pptb/main/README.md",
+        "website": "https://github.com/tcooi/meva-pptb"
+    },
+    "features": {
+        "connections": {
+            "min": 1,
+            "max": 5
+        },
+        "minAPI": "1.2.7"
+    },
+    "keywords": [
+        "dataverse",
+        "power-platform",
+        "environment-variables",
+        "alm",
+        "compare"
+    ],
+    "engines": {
+        "node": ">=18.0.0"
+    },
+    "scripts": {
+        "build": "tsc && vite build",
+        "dev": "vite",
+        "watch": "vite build --watch",
+        "dev-watch": "vite build --mode development --watch",
+        "preview": "vite preview",
+        "finalize-package": "npm shrinkwrap",
+        "validate": "pptb-validate",
+        "version-stable": "npm version patch --no-git-tag-version",
+        "publish-package": "npm run build && npm run version-stable && npm publish --access public"
+    },
+    "dependencies": {
+        "@fluentui/react-components": "^9.72.7",
+        "@fluentui/react-icons": "^2.0.314",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "write-excel-file": "^4.1.1"
+    },
+    "devDependencies": {
+        "@pptb/types": "^1.2.0",
+        "@types/react": "^18.3.12",
+        "@types/react-dom": "^18.3.1",
+        "@vitejs/plugin-react": "^4.3.4",
+        "typescript": "^5.6.3",
+        "vite": "^7.1.11"
+    },
+    "files": [
+        "dist",
+        "npm-shrinkwrap.json"
+    ]
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Environment Variables Manager</title>
+    <style>
+        /* The app's own stylesheet (which also resets this) only arrives with the app script, so remove the
+           browser's default margin here; otherwise the boot screen sits 8px lower and overflows the window */
+        body {
+            margin: 0;
+        }
+        /* Shown until React mounts and replaces the contents of #root */
+        .boot-loader {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
+            font-size: 14px;
+            line-height: 20px;
+            color: #616161;
+            background: #ffffff;
+        }
+        /* Same size, stroke and colours as the Fluent Spinner (size "small") on the app's own loading
+           screen, so the spinner doesn't change size when the app takes over */
+        .boot-loader__spinner {
+            box-sizing: border-box;
+            width: 28px;
+            height: 28px;
+            border: 2px solid #b4d6fa;
+            border-top-color: #0f6cbd;
+            border-radius: 50%;
+            animation: boot-spin 0.9s linear infinite;
+        }
+        /* Two lines reserved, like the app's loading screen, so the spinner doesn't shift when it takes over */
+        .boot-loader__text {
+            min-height: 40px;
+            max-width: 480px;
+            padding: 0 16px;
+            text-align: center;
+        }
+        @keyframes boot-spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        /* Lets the browser paint its default canvas, scrollbars and form controls in the matching
+           scheme (system until PPTB's theme is known, then PPTB's) instead of always light. */
+        html {
+            color-scheme: light dark;
+        }
+        html[data-theme='light'] {
+            color-scheme: light;
+        }
+        html[data-theme='dark'] {
+            color-scheme: dark;
+        }
+        /* Dark colours match Fluent's webDarkTheme so there is no flash when the app takes over.
+           PPTB's own theme (data-theme, set below) wins; until it answers, follow the system. */
+        html[data-theme='dark'],
+        html[data-theme='dark'] .boot-loader {
+            color: #adadad;
+            background: #292929;
+        }
+        html[data-theme='dark'] .boot-loader__spinner {
+            border-color: #0e4775;
+            border-top-color: #479ef5;
+        }
+        @media (prefers-color-scheme: dark) {
+            html:not([data-theme='light']),
+            html:not([data-theme='light']) .boot-loader {
+                color: #adadad;
+                background: #292929;
+            }
+            html:not([data-theme='light']) .boot-loader__spinner {
+                border-color: #0e4775;
+                border-top-color: #479ef5;
+            }
+        }
+    </style>
+    <script>
+        // PPTB's preload exposes toolboxAPI before page scripts run, so ask for its theme right away.
+        // main.tsx reuses this promise so React's first render already uses the right theme.
+        (function () {
+            try {
+                var utils = window.toolboxAPI && window.toolboxAPI.utils;
+                if (!utils || !utils.getCurrentTheme) return;
+                window.__pptbTheme = utils.getCurrentTheme().then(function (theme) {
+                    document.documentElement.setAttribute('data-theme', theme === 'dark' ? 'dark' : 'light');
+                    return theme;
+                });
+            } catch (e) {
+                /* Not running inside PPTB */
+            }
+        })();
+    </script>
+</head>
+<body>
+    <div id="root">
+        <div class="boot-loader" role="status" aria-live="polite">
+            <div class="boot-loader__spinner"></div>
+            <div class="boot-loader__text">Loading Environment Variables Manager…</div>
+        </div>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+</body>
+</html>
