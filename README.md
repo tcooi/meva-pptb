@@ -30,6 +30,7 @@ This tool only writes to Dataverse when you choose to, and never when it opens. 
 - **Remove a current value**: deletes the `environmentvariablevalue` record, so the default value applies again.
 - **Set or clear a default value**: updates `defaultvalue` on the `environmentvariabledefinition`.
 - **Create a variable**: creates an `environmentvariabledefinition` (and an optional current value) and can add it to an unmanaged solution with `AddSolutionComponent`.
+- **Copy variables to another environment**: creates the same definitions (schema name, display name, description, type, default value, and the current value only if you ask) in the target environment, one at a time, and can add them to an unmanaged solution there. **Copy missing** can create several in one go. Existing variables are never overwritten.
 
 It never deletes variable definitions or edits Secret or Data source values. In Production environments every change asks for confirmation first. Changes can't be undone from the tool. Use **Export** to save the current values first if you may need to restore them.
 
